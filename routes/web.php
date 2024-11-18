@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\HomeController;
 use App\Models\destinasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('wisata.index');
-});
 
 Auth::routes();
 
+Route::get('/',[DestinasiController::class,'home'])->name('wisata.index');
 Route::get('/wisata/index',[DestinasiController::class,'cari'])->name('wisata.cari');
 
-Route::resource('/wisata',DestinasiController::class);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth','role:1'])->group(function(){
+    Route::get('/admin/index',[HomeController::class,'index'])->name('admin.index');
+
+    Route::resource('/admin/destinasi',DestinasiController::class);
+});

@@ -25,7 +25,7 @@
                     <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0 d-flex m-4">
                         <div class="media-1 text-center">
                             <a href="#" class="d-block mb-3">
-                                <img src="{{ asset('master/images/hero-slider-1.jpg') }}" alt="Image" class="img-fluid">
+                                <img src="{{ Storage::url('images/' . $des->img) }}" alt="Image" class="img-fluid">
                             </a>
                             <span class="d-flex align-items-center loc mb-2">
                                 <span class="icon-room mr-3"></span>
@@ -33,7 +33,6 @@
                             </span>
                             <div class="d-flex align-items-center justify-content-center">
                                 <div>
-                                    <h3><a href="#">{{ $des->aktivitas }}</a></h3>
                                     <div class="price ml-auto">
                                         <span>Rp.{{ number_format($des->harga) }}.-</span>
                                     </div>
