@@ -32,7 +32,7 @@
                             <div class="d-flex align-items-center justify-content-center">
                                 <div>
                                     <div class="price ml-auto">
-                                        <span>Rp.{{ number_format($des->harga) }}.-</span>
+                                        <span>Rp.{{ number_format($des->harga) }}.- / {{ $des->durasi }} Hari</span>
                                     </div>
                                 </div>
                             </div>

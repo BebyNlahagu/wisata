@@ -17,6 +17,7 @@
                             <th>Nama</th>
                             <th class="d-none d-xl-table-cell">Aktifitas</th>
                             <th class="d-none d-xl-table-cell">Harga</th>
+                            <th class="d-none d-md-table-cell">Durasi</th>
                             <th class="d-none d-md-table-cell">Foto</th>
                             <th>Aksi</th>
                         </tr>
@@ -31,6 +32,7 @@
                                 <td>{{ $d->nama }}</td>
                                 <td class="d-none d-xl-table-cell">{{ $d->aktivitas }}</td>
                                 <td class="d-none d-xl-table-cell">{{ number_format($d->harga) }}</td>
+                                <td class="d-none d-xl-table-cell">{{ $d->durasi }}</td>
                                 <td>
                                     @if ($d->img)
                                         <img src="{{ Storage::url('images/' . $d->img) }}"alt="Gambar Destinasi"
