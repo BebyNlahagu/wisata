@@ -3,11 +3,9 @@
     <div class="hero hero-inner">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 mx-auto text-center">
+                <div class="col-lg-12 mx-auto text-center">
                     <div class="intro-wrap">
                         <h1 class="mb-0">Rekomendasi wisata</h1>
-                        <p class="text-white">Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the blind texts. </p>
                     </div>
                 </div>
             </div>
@@ -38,6 +36,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="rating mt-3">
+                                <a href="{{ route('rate.keren') }}" class="btn btn-sm btn-primary">
+                                    Berikan Rating
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 @endforeach

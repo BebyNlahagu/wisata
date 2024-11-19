@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\destinasi;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DestinasiController extends Controller
 {
+    public function keren()
+    {
+        $destinasi = destinasi::all();
+        $rating = Rating::with('destinasi')->get();
+        return view('wisata.rate', compact('rating', 'destinasi'));
+    }
+
     public function index()
     {
         $destinasi = destinasi::all();
-        return  view('admin.destinasi.index',compact('destinasi'));
+        return  view('admin.destinasi.index', compact('destinasi'));
     }
 
     public function home()
@@ -79,10 +87,27 @@ class DestinasiController extends Controller
         return view('wisata.rekomendasi', compact('destinations'));
     }
 
+    public function submit(Request $request)
+    {
+        $request->validate([
+            'destinasi_id' => 'required|exists:destinasis,id',  // Validasi destinasi_id
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        Destinasi::findOrFail($request->destinasi_id);
+        Rating::create([
+            'destinasi_id' => $request->destinasi_id,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->route('rate.keren');
+    }
+
+
     public function edit($id)
     {
         $destinasi = destinasi::findOrFail($id);
-        return redirect()->route('destinasi.index',compact('destinasi'));
+        return redirect()->route('destinasi.index', compact('destinasi'));
     }
 
     public function update(Request $request, $id)

@@ -24,16 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-       if(auth()->check()){
+        if (auth()->check()) {
             $role = Auth::user()->role;
 
-            switch($role){
+            switch ($role) {
                 case 1:
                     return view('admin.index');
-                case 2:
-                    return view('user.index');
                 default :
-                    return view('wisata.index');
+                    return view('user.index');
             }
        }
     }
