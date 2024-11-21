@@ -90,12 +90,14 @@ class DestinasiController extends Controller
     public function submit(Request $request)
     {
         $request->validate([
+            'nama' => 'required',
             'destinasi_id' => 'required|exists:destinasis,id',  // Validasi destinasi_id
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         Destinasi::findOrFail($request->destinasi_id);
         Rating::create([
+            'nama' => $request->nama,
             'destinasi_id' => $request->destinasi_id,
             'rating' => $request->rating,
         ]);

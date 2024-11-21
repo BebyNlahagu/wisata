@@ -23,6 +23,14 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label class="text-black" for="lname">Nama</label>
+                                    <input type="text" name="nama"
+                                        class="form-control" id="lname">
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
                                     <label class="text-black" for="fname">Destinasi</label>
                                     <select type="text" class="form-control" name="destinasi_id">
                                         <option value=""></option>
@@ -47,6 +55,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>Nama</th>
                                 <th>Nama Destinasi</th>
                                 <th>Rating</th>
                             </tr>
@@ -54,6 +63,7 @@
                         <tbody>
                             @foreach ($rating as $d)
                                 <tr>
+                                    <td>{{ $d->nama }}</td>
                                     <td>{{ $d->destinasi->nama }}</td>
                                     <td>{{ $d->rating }}</td>
                                 </tr>
