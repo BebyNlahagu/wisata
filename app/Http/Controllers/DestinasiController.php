@@ -114,35 +114,29 @@ class DestinasiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required',
             'aktivitas' => 'required',
             'harga' => 'required',
             'durasi' => 'required',
-            'img' => 'required',
+            'img' => 'nullable|image',
         ]);
 
-        $destinasi = destinasi::findOrFail($id);
+        $destinasi = Destinasi::findOrFail($id);
 
         if ($request->hasFile('img')) {
-            if (Storage::exists('public/images/' . $destinasi->img)) {
+            if ($destinasi->img && Storage::exists('public/images/' . $destinasi->img)) {
                 Storage::delete('public/images/' . $destinasi->img);
             }
-
+            
             $image = $request->file('img');
-            $image_ex = $image->extension();
-            $imageNama = date('ymdhis') . "." . $image_ex;
+            $image_ex = $image->getClientOriginalExtension();
+            $imageNama = now()->format('YmdHis') . '.' . $image_ex;
             $image->storeAs('public/images', $imageNama);
-        } else {
-            $imageNama = $destinasi->img;
+            $data['img'] = $imageNama;
         }
 
-        $destinasi->nama = $request->input('nama');
-        $destinasi->aktivitas = $request->input('aktivitas');
-        $destinasi->harga = $request->input('harga');
-        $destinasi->durasi = $request->input('durasi');
-        $destinasi->img = $imageNama;
-        $destinasi->save();
+        $destinasi->update($data);
 
         return redirect()->route('destinasi.index');
     }

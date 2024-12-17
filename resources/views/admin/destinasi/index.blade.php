@@ -41,7 +41,13 @@
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     <a class="btn btn-info" href="{{ route('destinasi.edit', ['destinasi' => $d->id]) }}" data-bs-target="#edit{{ $d->id }}" data-bs-toggle="modal">edit</a>
-                                    <a class="btn btn-danger" href="">hapus</a>
+                                    <form action="{{ route('destinasi.destroy',$d->id) }}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger ms-auto">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
